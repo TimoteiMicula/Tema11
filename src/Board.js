@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import Square from "./Square";
 
 const calculateWinner = (squares) => {
@@ -27,126 +27,62 @@ const calculateWinner = (squares) => {
   return null;
 };
 
-// class Board extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     squares: Array(9).fill(null),
-  //     xIsNext: true,
-  //   };
-  // }
-
-  // onSquareClick(index) {
-  //   const winner = calculateWinner(this.state.squares);
-  //   const newSquares = [...this.state.squares];
-  //   if (newSquares[index] !== null || winner !== null) {
-  //     return;
-  // }
-
-    // newSquares[index] = this.state.xIsNext ? "X" : "0";
-    // this.setState({
-    //   squares: newSquares,
-    //   xIsNext: !this.state.xIsNext,
-    // });
-  // }
-
-  // render() {
-  //   const winner = calculateWinner(this.state.squares);
-  //   let status;
-  //   if (winner) {
-  //     status = (
-  //       <div className="winner">
-  //         <span>{winner}</span> is the Winner!
-  //       </div>
-  //     );
-  //   } else {
-  //     status = (
-  //       <div className="status">
-  //         Next player: {this.state.xIsNext ? "X" : "O"}
-  //       </div>
-  //     );
-  //   }
-
-  //   const items = this.state.squares.map((value, index) => {
-  //     return (
-  //       <Square
-  //         key={index}
-  //         value={value}
-  //         onClick={() => {
-  //           this.onSquareClick(index);
-  //         }}
-  //       />
-  //     );
-  //   });
-
-  //   return (
-  //     <div>
-  //       {status}
-  //       <div className="board">{items}</div>
-  //     </div>
-  //   );
-  // }
-// }
 
 const Board = () => {
-  const [squares, xIsNext, setSquare] = useState(Array(9).fill(5), true)
+  const [squares, setSquares] = useState(Array(9).fill(null));
+  const [xIsNext, setXisNext] = useState(true);
 
-  useEffect(() => {
-    function onSquareClick(index) {
-      const winner = calculateWinner(squares);
-      const newSquares = [...squares];
-      if (newSquares[index] !== null || winner !== null) {
-        return;
-      }
+  const onSquareClick = (index) => {  // (index) 
+    const winner = calculateWinner(squares);
+    const newSquares = [squares];
+
+    if (newSquares[index] !== null || winner !== null) {
+      return;
+
     }
 
     newSquares[index] = xIsNext ? "X" : "0";
-    setSquare(squares=newSquares, xIsNext=!xIsNext)
+    setSquares(newSquares);
+    setXisNext(xIsNext)
 
-    function winner() {
-      const winner = calculateWinner(squares);
+  }
+
+  const winner = calculateWinner(squares);
     let status;
     if (winner) {
-      return status = (
+      status = (
         <div className="winner">
           <span>{winner}</span> is the Winner!
         </div>
       );
     } else {
-      return status = (
+      status = (
         <div className="status">
           Next player: {xIsNext ? "X" : "O"}
         </div>
       );
     }
-    }
-
-    function squares() {
-      return items = squares.map((value, index) => {
-        return (
-          <Square
-            key={index}
-            value={value}
-            onClick={() => {
-              onSquareClick(index);
-            }}
-          />
-        );
-      });
-    }
-
-    return(
-      winner(),
-      squares(),
   
+    const items = squares.map((value, index) => {
+      return (
+        <Square
+          key={index}
+          value={value}
+          onClick={() => {
+            onSquareClick(index);
+          }}
+        />
+      );
+    });
+  
+    return (
       <div>
         {status}
         <div className="board">{items}</div>
       </div>
     );
-  
-}
-)
-}
 
+
+
+}
 export default Board;

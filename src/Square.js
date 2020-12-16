@@ -12,11 +12,11 @@ import React from "react";
 //   }
 // }
 
-  function Square() {
+  function Square({onClick,value}) {
   
     return (
-      <div className="square" onClick={this.props.onClick}>
-        {this.props.value}
+      <div className="square" onClick={onClick}>
+        {value}
       </div>
     );
   }
