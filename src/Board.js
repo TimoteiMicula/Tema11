@@ -33,10 +33,10 @@ const Board = () => {
   const [xIsNext, setXisNext] = useState(true);
 
   const onSquareClick = (index) => { 
-     console.log(index) 
+    console.log(index) 
     const winner = calculateWinner(squares);
     const newSquares = [...squares];
-    console.log(newSquares);
+     console.log(newSquares);
 
     if (newSquares[index] !== null || winner !== null) {
       return;
