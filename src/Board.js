@@ -32,9 +32,11 @@ const Board = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXisNext] = useState(true);
 
-  const onSquareClick = (index) => {  // (index) 
+  const onSquareClick = (index) => { 
+     console.log(index) 
     const winner = calculateWinner(squares);
-    const newSquares = [squares];
+    const newSquares = [...squares];
+    console.log(newSquares);
 
     if (newSquares[index] !== null || winner !== null) {
       return;
@@ -43,7 +45,8 @@ const Board = () => {
 
     newSquares[index] = xIsNext ? "X" : "0";
     setSquares(newSquares);
-    setXisNext(xIsNext)
+    setXisNext(!xIsNext)
+   
 
   }
 
